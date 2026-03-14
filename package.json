@@ -1,14 +1,18 @@
 {
-  "name": "gatekeeper",
+  "name": "@gatekpr/gatekeeper",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Solana-native API gateway backend with a public Devnet CLI client",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/greendefibanana/GateKpr.git"
   },
   "bin": {
+    "gatekpr": "./bin/gatekeeper.mjs",
     "gatekeeper": "./bin/gatekeeper.mjs"
   },
   "scripts": {
