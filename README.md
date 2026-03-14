@@ -2,8 +2,6 @@
 
 Gatekeeper is a Solana-native backend runtime that splits durable control-plane state from real-time execution state.
 
-For submission review, start with [docs/SUBMISSION.md](/C:/Users/ezevi/Documents/GateKpr/docs/SUBMISSION.md).
-
 This refactor keeps the original backend story intact:
 
 - organizations
