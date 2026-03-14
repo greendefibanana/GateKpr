@@ -531,7 +531,7 @@ Use a funded Devnet wallet JSON file and point the client at Devnet explicitly:
 
 ```bash
 npm install
-npx @gatekpr/gatekeeper help
+npm exec --yes --package=@gatekpr/gatekeeper gatekpr help
 node ./bin/gatekeeper.mjs help
 node ./bin/gatekeeper.mjs init-gateway --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json
 ```

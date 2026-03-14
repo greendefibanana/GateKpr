@@ -1,6 +1,6 @@
 {
   "name": "@gatekpr/gatekeeper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "Solana-native API gateway backend with a public Devnet CLI client",
   "license": "MIT",
@@ -48,11 +48,11 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.32.1",
     "@solana/web3.js": "^1.98.0",
-    "magic-router-sdk": "^1.0.10"
+    "magic-router-sdk": "^1.0.10",
+    "tsx": "^4.20.5"
   },
   "devDependencies": {
     "@types/node": "^24.6.1",
-    "tsx": "^4.20.5",
     "typescript": "^5.9.3"
   }
 }
