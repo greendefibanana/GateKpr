@@ -2,14 +2,18 @@ import * as anchor from "@coral-xyz/anchor";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { sendMagicTransaction } from "magic-router-sdk";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export const PROGRAM_ID = new PublicKey(
   "5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu",
 );
 
 export const MAGIC_ROUTER_ENV = "MAGIC_ROUTER_URL";
+export const IDL_PATH_ENV = "GATEKEEPER_IDL_PATH";
+
+const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
 
 export type RuntimeHealth = {
   delegated: boolean;
@@ -48,8 +52,12 @@ export const DECISION_REASONS = {
   invalidAction: 4,
 } as const;
 
+export function resolveIdlPath(): string {
+  return process.env[IDL_PATH_ENV] ?? join(MODULE_DIR, "idl", "gatekeeper.json");
+}
+
 export function loadIdl(): anchor.Idl {
-  const idlPath = join(process.cwd(), "target", "idl", "gatekeeper.json");
+  const idlPath = resolveIdlPath();
   return JSON.parse(readFileSync(idlPath, "utf8")) as anchor.Idl;
 }
 
@@ -172,6 +180,21 @@ export function maskFromPolicyInput(input: string): number {
 export function readWallet(path: string): anchor.Wallet {
   const secretKey = Uint8Array.from(JSON.parse(readFileSync(path, "utf8")) as number[]);
   return new anchor.Wallet(anchor.web3.Keypair.fromSecretKey(secretKey));
+}
+
+export function resolveWalletPath(path?: string): string {
+  if (path) {
+    return path;
+  }
+
+  const localWalletPath = join(process.cwd(), "wallets", "localnet-authority.json");
+  if (existsSync(localWalletPath)) {
+    return localWalletPath;
+  }
+
+  throw new Error(
+    "Wallet path not configured. Set --wallet or ANCHOR_WALLET to a funded keypair JSON file.",
+  );
 }
 
 export function toNumber(value: unknown): number {

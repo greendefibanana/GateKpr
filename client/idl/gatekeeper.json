@@ -1,0 +1,2123 @@
+{
+  "address": "5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu",
+  "metadata": {
+    "name": "gatekeeper",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "On-chain API gateway backend for Solana"
+  },
+  "instructions": [
+    {
+      "name": "attach_policy_to_role",
+      "discriminator": [
+        87,
+        71,
+        51,
+        72,
+        198,
+        17,
+        17,
+        128
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "role",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  111,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "account",
+                "path": "role.name",
+                "account": "Role"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "policy_mask",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "commit_and_undelegate_quota_runtime",
+      "discriminator": [
+        206,
+        43,
+        0,
+        148,
+        213,
+        127,
+        125,
+        17
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  114,
+                  117,
+                  110,
+                  116,
+                  105,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_quota_runtime",
+      "discriminator": [
+        237,
+        207,
+        175,
+        29,
+        11,
+        19,
+        13,
+        93
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  114,
+                  117,
+                  110,
+                  116,
+                  105,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "magic_program",
+          "address": "Magic11111111111111111111111111111111111111"
+        },
+        {
+          "name": "magic_context",
+          "writable": true,
+          "address": "MagicContext1111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "consume_request",
+      "discriminator": [
+        46,
+        163,
+        130,
+        143,
+        203,
+        212,
+        50,
+        11
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "signer": true
+        },
+        {
+          "name": "organization"
+        },
+        {
+          "name": "role"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_policy"
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "action",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "create_api_key",
+      "discriminator": [
+        239,
+        195,
+        250,
+        230,
+        153,
+        63,
+        174,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "organization",
+          "writable": true
+        },
+        {
+          "name": "role"
+        },
+        {
+          "name": "api_key",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  112,
+                  105,
+                  95,
+                  107,
+                  101,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "arg",
+                "path": "key_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "key_id",
+          "type": "pubkey"
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "create_organization",
+      "discriminator": [
+        60,
+        173,
+        177,
+        39,
+        122,
+        23,
+        68,
+        185
+      ],
+      "accounts": [
+        {
+          "name": "gateway",
+          "writable": true
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  103,
+                  97,
+                  110,
+                  105,
+                  122,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "gateway"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "gateway"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "organization_authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "create_quota_policy",
+      "discriminator": [
+        157,
+        142,
+        196,
+        22,
+        58,
+        128,
+        241,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  112,
+                  111,
+                  108,
+                  105,
+                  99,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "max_requests",
+          "type": "u64"
+        },
+        {
+          "name": "window_seconds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "create_role",
+      "discriminator": [
+        170,
+        147,
+        127,
+        223,
+        222,
+        112,
+        205,
+        163
+      ],
+      "accounts": [
+        {
+          "name": "organization",
+          "writable": true
+        },
+        {
+          "name": "role",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  111,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "delegate_quota_runtime",
+      "discriminator": [
+        103,
+        233,
+        223,
+        232,
+        218,
+        80,
+        166,
+        112
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_policy"
+        },
+        {
+          "name": "buffer_quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  102,
+                  102,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "quota_runtime"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                66,
+                132,
+                68,
+                35,
+                75,
+                255,
+                151,
+                153,
+                176,
+                227,
+                5,
+                243,
+                1,
+                44,
+                245,
+                0,
+                193,
+                255,
+                78,
+                249,
+                39,
+                18,
+                65,
+                204,
+                170,
+                202,
+                209,
+                165,
+                17,
+                253,
+                88,
+                252
+              ]
+            }
+          }
+        },
+        {
+          "name": "delegation_record_quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "quota_runtime"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "delegation_metadata_quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  101,
+                  108,
+                  101,
+                  103,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "quota_runtime"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "delegation_program"
+            }
+          }
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  114,
+                  117,
+                  110,
+                  116,
+                  105,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "owner_program",
+          "address": "5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu"
+        },
+        {
+          "name": "delegation_program",
+          "address": "DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "validator",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "commit_frequency_ms",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "initialize_gateway",
+      "discriminator": [
+        121,
+        125,
+        32,
+        43,
+        123,
+        11,
+        240,
+        118
+      ],
+      "accounts": [
+        {
+          "name": "gateway",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  116,
+                  101,
+                  119,
+                  97,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_quota_runtime",
+      "discriminator": [
+        155,
+        110,
+        226,
+        107,
+        39,
+        233,
+        87,
+        19
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_policy"
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  114,
+                  117,
+                  110,
+                  116,
+                  105,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "audit_checkpoint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  100,
+                  105,
+                  116,
+                  95,
+                  99,
+                  104,
+                  101,
+                  99,
+                  107,
+                  112,
+                  111,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "process_undelegation",
+      "discriminator": [
+        196,
+        28,
+        41,
+        206,
+        48,
+        37,
+        51,
+        167
+      ],
+      "accounts": [
+        {
+          "name": "base_account",
+          "writable": true
+        },
+        {
+          "name": "buffer"
+        },
+        {
+          "name": "payer",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "account_seeds",
+          "type": {
+            "vec": "bytes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "revoke_api_key",
+      "discriminator": [
+        243,
+        12,
+        2,
+        136,
+        215,
+        55,
+        213,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "organization"
+        },
+        {
+          "name": "api_key",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  112,
+                  105,
+                  95,
+                  107,
+                  101,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "account",
+                "path": "api_key.key_id",
+                "account": "ApiKey"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "settle_runtime_checkpoint",
+      "discriminator": [
+        223,
+        188,
+        207,
+        124,
+        64,
+        129,
+        216,
+        170
+      ],
+      "accounts": [
+        {
+          "name": "organization",
+          "writable": true
+        },
+        {
+          "name": "api_key"
+        },
+        {
+          "name": "quota_runtime",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  113,
+                  117,
+                  111,
+                  116,
+                  97,
+                  95,
+                  114,
+                  117,
+                  110,
+                  116,
+                  105,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "audit_checkpoint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  100,
+                  105,
+                  116,
+                  95,
+                  99,
+                  104,
+                  101,
+                  99,
+                  107,
+                  112,
+                  111,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "organization"
+          ]
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ApiKey",
+      "discriminator": [
+        145,
+        206,
+        208,
+        16,
+        27,
+        179,
+        228,
+        163
+      ]
+    },
+    {
+      "name": "AuditCheckpoint",
+      "discriminator": [
+        95,
+        94,
+        222,
+        149,
+        44,
+        70,
+        246,
+        100
+      ]
+    },
+    {
+      "name": "Gateway",
+      "discriminator": [
+        210,
+        132,
+        162,
+        254,
+        10,
+        224,
+        45,
+        86
+      ]
+    },
+    {
+      "name": "Organization",
+      "discriminator": [
+        145,
+        38,
+        152,
+        251,
+        91,
+        57,
+        118,
+        160
+      ]
+    },
+    {
+      "name": "QuotaPolicy",
+      "discriminator": [
+        37,
+        32,
+        59,
+        103,
+        225,
+        157,
+        96,
+        131
+      ]
+    },
+    {
+      "name": "QuotaRuntime",
+      "discriminator": [
+        63,
+        169,
+        202,
+        223,
+        238,
+        153,
+        214,
+        224
+      ]
+    },
+    {
+      "name": "Role",
+      "discriminator": [
+        46,
+        219,
+        197,
+        24,
+        233,
+        249,
+        253,
+        154
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "ApiKeyCreated",
+      "discriminator": [
+        64,
+        2,
+        19,
+        158,
+        93,
+        200,
+        123,
+        42
+      ]
+    },
+    {
+      "name": "ApiKeyRevoked",
+      "discriminator": [
+        91,
+        214,
+        0,
+        145,
+        95,
+        139,
+        234,
+        194
+      ]
+    },
+    {
+      "name": "AuditCheckpointSettled",
+      "discriminator": [
+        52,
+        6,
+        230,
+        127,
+        38,
+        81,
+        158,
+        47
+      ]
+    },
+    {
+      "name": "GatewayInitialized",
+      "discriminator": [
+        173,
+        26,
+        226,
+        181,
+        138,
+        2,
+        71,
+        40
+      ]
+    },
+    {
+      "name": "OrganizationCreated",
+      "discriminator": [
+        50,
+        45,
+        35,
+        29,
+        215,
+        59,
+        22,
+        185
+      ]
+    },
+    {
+      "name": "PolicyAttached",
+      "discriminator": [
+        1,
+        85,
+        121,
+        106,
+        225,
+        39,
+        195,
+        71
+      ]
+    },
+    {
+      "name": "QuotaPolicyConfigured",
+      "discriminator": [
+        20,
+        128,
+        26,
+        86,
+        60,
+        17,
+        201,
+        181
+      ]
+    },
+    {
+      "name": "QuotaRuntimeCommitted",
+      "discriminator": [
+        132,
+        222,
+        75,
+        215,
+        13,
+        239,
+        189,
+        141
+      ]
+    },
+    {
+      "name": "QuotaRuntimeDelegated",
+      "discriminator": [
+        44,
+        246,
+        46,
+        234,
+        238,
+        203,
+        161,
+        192
+      ]
+    },
+    {
+      "name": "QuotaRuntimeInitialized",
+      "discriminator": [
+        189,
+        3,
+        221,
+        58,
+        203,
+        97,
+        127,
+        108
+      ]
+    },
+    {
+      "name": "RequestConsumed",
+      "discriminator": [
+        114,
+        128,
+        52,
+        79,
+        80,
+        42,
+        239,
+        209
+      ]
+    },
+    {
+      "name": "RoleCreated",
+      "discriminator": [
+        203,
+        8,
+        94,
+        252,
+        142,
+        13,
+        51,
+        221
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "Unauthorized action for the assigned role"
+    },
+    {
+      "code": 6001,
+      "name": "KeyRevoked",
+      "msg": "API key has been revoked"
+    },
+    {
+      "code": 6002,
+      "name": "QuotaExceeded",
+      "msg": "Quota window has been exhausted"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidAction",
+      "msg": "Invalid action identifier"
+    },
+    {
+      "code": 6004,
+      "name": "RuntimeAlreadyInitialized",
+      "msg": "Quota runtime is already initialized"
+    },
+    {
+      "code": 6005,
+      "name": "RuntimeAlreadyDelegated",
+      "msg": "Quota runtime is already delegated"
+    },
+    {
+      "code": 6006,
+      "name": "RuntimeNotDelegated",
+      "msg": "Quota runtime is not delegated"
+    },
+    {
+      "code": 6007,
+      "name": "RuntimeStillDelegated",
+      "msg": "Quota runtime must be undelegated before settlement"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidOrganizationAuthority",
+      "msg": "Signer is not authorized for this organization"
+    },
+    {
+      "code": 6009,
+      "name": "DuplicateRole",
+      "msg": "Role already exists for this organization"
+    },
+    {
+      "code": 6010,
+      "name": "DuplicateKey",
+      "msg": "API key already exists for this organization"
+    },
+    {
+      "code": 6011,
+      "name": "DuplicateOrganization",
+      "msg": "Organization already exists for this seed"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidQuotaConfig",
+      "msg": "Invalid quota configuration"
+    },
+    {
+      "code": 6013,
+      "name": "MathOverflow",
+      "msg": "Arithmetic overflow"
+    },
+    {
+      "code": 6014,
+      "name": "InvalidPolicyMask",
+      "msg": "Invalid policy mask"
+    },
+    {
+      "code": 6015,
+      "name": "NameTooLong",
+      "msg": "Provided organization name is too long"
+    },
+    {
+      "code": 6016,
+      "name": "LabelTooLong",
+      "msg": "Provided API key label is too long"
+    },
+    {
+      "code": 6017,
+      "name": "RoleOrganizationMismatch",
+      "msg": "Role does not belong to the provided organization"
+    },
+    {
+      "code": 6018,
+      "name": "ApiKeyOrganizationMismatch",
+      "msg": "API key does not belong to the provided organization"
+    },
+    {
+      "code": 6019,
+      "name": "ApiKeyRoleMismatch",
+      "msg": "API key is not attached to the provided role"
+    },
+    {
+      "code": 6020,
+      "name": "QuotaPolicyMismatch",
+      "msg": "Quota policy does not belong to the provided API key"
+    },
+    {
+      "code": 6021,
+      "name": "QuotaRuntimeMismatch",
+      "msg": "Quota runtime does not match the provided API key or organization"
+    },
+    {
+      "code": 6022,
+      "name": "AuditCheckpointMismatch",
+      "msg": "Audit checkpoint does not match the provided runtime"
+    },
+    {
+      "code": 6023,
+      "name": "InvalidCommitFrequency",
+      "msg": "Invalid runtime commit frequency"
+    }
+  ],
+  "types": [
+    {
+      "name": "ApiKey",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": "pubkey"
+          },
+          {
+            "name": "key_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          },
+          {
+            "name": "created_by",
+            "type": "pubkey"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "revoked_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ApiKeyCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": "pubkey"
+          },
+          {
+            "name": "key_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "label",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ApiKeyRevoked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "revoked_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuditCheckpoint",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_policy",
+            "type": "pubkey"
+          },
+          {
+            "name": "settled_sequence",
+            "type": "u64"
+          },
+          {
+            "name": "total_allowed",
+            "type": "u64"
+          },
+          {
+            "name": "total_rejected",
+            "type": "u64"
+          },
+          {
+            "name": "current_window_used",
+            "type": "u64"
+          },
+          {
+            "name": "current_window_started_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_action",
+            "type": "u8"
+          },
+          {
+            "name": "last_reason",
+            "type": "u8"
+          },
+          {
+            "name": "last_request_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_settled_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuditCheckpointSettled",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_runtime",
+            "type": "pubkey"
+          },
+          {
+            "name": "audit_checkpoint",
+            "type": "pubkey"
+          },
+          {
+            "name": "settled_sequence",
+            "type": "u64"
+          },
+          {
+            "name": "settled_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gateway",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "organization_count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GatewayInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "gateway",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Organization",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "gateway",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "role_count",
+            "type": "u64"
+          },
+          {
+            "name": "api_key_count",
+            "type": "u64"
+          },
+          {
+            "name": "settlement_count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OrganizationCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PolicyAttached",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": "pubkey"
+          },
+          {
+            "name": "policy_mask",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaPolicy",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "max_requests",
+            "type": "u64"
+          },
+          {
+            "name": "window_seconds",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaPolicyConfigured",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_policy",
+            "type": "pubkey"
+          },
+          {
+            "name": "max_requests",
+            "type": "u64"
+          },
+          {
+            "name": "window_seconds",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaRuntime",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_policy",
+            "type": "pubkey"
+          },
+          {
+            "name": "delegated_validator",
+            "type": "pubkey"
+          },
+          {
+            "name": "commit_frequency_ms",
+            "type": "u32"
+          },
+          {
+            "name": "is_delegated",
+            "type": "bool"
+          },
+          {
+            "name": "total_allowed",
+            "type": "u64"
+          },
+          {
+            "name": "total_rejected",
+            "type": "u64"
+          },
+          {
+            "name": "current_window_used",
+            "type": "u64"
+          },
+          {
+            "name": "current_window_started_at",
+            "type": "i64"
+          },
+          {
+            "name": "rolling_sequence",
+            "type": "u64"
+          },
+          {
+            "name": "last_action",
+            "type": "u8"
+          },
+          {
+            "name": "last_reason",
+            "type": "u8"
+          },
+          {
+            "name": "last_request_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_settled_sequence",
+            "type": "u64"
+          },
+          {
+            "name": "last_settled_at",
+            "type": "i64"
+          },
+          {
+            "name": "rolling_audit",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "RuntimeAuditRecord"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaRuntimeCommitted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_runtime",
+            "type": "pubkey"
+          },
+          {
+            "name": "sequence",
+            "type": "u64"
+          },
+          {
+            "name": "still_delegated",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaRuntimeDelegated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_runtime",
+            "type": "pubkey"
+          },
+          {
+            "name": "commit_frequency_ms",
+            "type": "u32"
+          },
+          {
+            "name": "validator",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QuotaRuntimeInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_runtime",
+            "type": "pubkey"
+          },
+          {
+            "name": "audit_checkpoint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RequestConsumed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "api_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "quota_runtime",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": "pubkey"
+          },
+          {
+            "name": "action",
+            "type": "u8"
+          },
+          {
+            "name": "allowed",
+            "type": "bool"
+          },
+          {
+            "name": "reason",
+            "type": "u8"
+          },
+          {
+            "name": "sequence",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "quota_used",
+            "type": "u64"
+          },
+          {
+            "name": "quota_limit",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Role",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "policy_mask",
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RoleCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RuntimeAuditRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "sequence",
+            "type": "u64"
+          },
+          {
+            "name": "action",
+            "type": "u8"
+          },
+          {
+            "name": "allowed",
+            "type": "bool"
+          },
+          {
+            "name": "reason",
+            "type": "u8"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "quota_used_after",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

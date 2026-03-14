@@ -65,6 +65,16 @@ This keeps configuration and audit truth on base while moving the hottest mutabl
 - The plain base-RPC path still works without MagicBlock infrastructure; that improves portability, but it does not deliver the same latency profile as delegated execution
 - Full ER behavior depends on router-aware transport and compatible infrastructure; local tests focus on the base-compatible path, while ER validation is done with dedicated diagnostics and smoke flows
 
+## Devnet Transaction Links
+
+- Program: [Gatekeeper on Devnet](https://explorer.solana.com/address/5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu?cluster=devnet)
+- Multi-tenant onboarding: [3J7HCNNm9NeoHSS9Zn2oZfHA8fLy5mQ9fRg28KJeGF13z3x35Ppg1QkFPf82YxKqymBUqQAhRVyNGxgpaTqaDvi](https://explorer.solana.com/tx/3J7HCNNm9NeoHSS9Zn2oZfHA8fLy5mQ9fRg28KJeGF13z3x35Ppg1QkFPf82YxKqymBUqQAhRVyNGxgpaTqaDvi?cluster=devnet)
+- RBAC allow: [5MoB1k7F3r48ZfSAhLtoQkQhP5fmCQuQgzpkSF7n1GMQpDuLAkFHdiAo4cHpVfJo4To5Tr3GGYtH4UDc5TDMVpHd](https://explorer.solana.com/tx/5MoB1k7F3r48ZfSAhLtoQkQhP5fmCQuQgzpkSF7n1GMQpDuLAkFHdiAo4cHpVfJo4To5Tr3GGYtH4UDc5TDMVpHd?cluster=devnet)
+- RBAC reject: [4GbHueHxxbvjSUhw2E1M5P7S6Y8FVxc4R5TxBS6cjEuQLsadbLZNhyuNHQFwpAQFmChYrqhPAV1s2XMBnKRvnGGi](https://explorer.solana.com/tx/4GbHueHxxbvjSUhw2E1M5P7S6Y8FVxc4R5TxBS6cjEuQLsadbLZNhyuNHQFwpAQFmChYrqhPAV1s2XMBnKRvnGGi?cluster=devnet)
+- Quota exceeded: [193LyGPZjGsZXjBWxt9UTXQCktFDG3HAgPjZUEgTZqbBcLc1u94S7x23fvZETdJsxxk5ezMwCginbh1nR5WmGUc](https://explorer.solana.com/tx/193LyGPZjGsZXjBWxt9UTXQCktFDG3HAgPjZUEgTZqbBcLc1u94S7x23fvZETdJsxxk5ezMwCginbh1nR5WmGUc?cluster=devnet)
+- Initial settlement: [oDAeJbXxDxgYmBWrsysybFqa1zPdMKbexTAe64hgtD9YeAXDzrPjtB5RMMFutqFvaQw5KaoChAQAbuEW6fscgir](https://explorer.solana.com/tx/oDAeJbXxDxgYmBWrsysybFqa1zPdMKbexTAe64hgtD9YeAXDzrPjtB5RMMFutqFvaQw5KaoChAQAbuEW6fscgir?cluster=devnet)
+- Revoke key: [48UUPj6FmRHzBEDG2ins7qm3V3KncDVK11XQaHRnJJzREbnhTsR1Q8AmKo2SE65Hrk6sFueoxrK9mofKWwHxvXPP](https://explorer.solana.com/tx/48UUPj6FmRHzBEDG2ins7qm3V3KncDVK11XQaHRnJJzREbnhTsR1Q8AmKo2SE65Hrk6sFueoxrK9mofKWwHxvXPP?cluster=devnet)
+
 ## Why This Matters
 
 A normal Web2 gateway typically splits responsibilities anyway:
@@ -513,11 +523,45 @@ This is the fastest way to distinguish:
 
 For the full recommended local validation order, see [docs/LOCAL_ER_RUNBOOK.md](/C:/Users/ezevi/Documents/GateKpr/docs/LOCAL_ER_RUNBOOK.md).
 
+## Public Devnet Client
+
+The public shared client for this submission is the CLI in this repo. It is designed to work against the deployed Devnet program without requiring a local program build.
+
+### Quickstart
+
+Use a funded Devnet wallet JSON file and point the client at Devnet explicitly:
+
+```bash
+npm install
+node ./bin/gatekeeper.mjs help
+node ./bin/gatekeeper.mjs init-gateway --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json
+```
+
+### Self-contained Devnet demo
+
+This is the fastest public test path for reviewers because it provisions fresh tenant state under their own wallet and prints a JSON report:
+
+```bash
+npm install
+npx tsx scripts/devnet-web2-demo.ts --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json --run-id reviewer01
+```
+
+### Public CLI examples
+
+Once a reviewer has created their own org, role, key, and runtime state on Devnet, the shared client can be exercised directly:
+
+```bash
+node ./bin/gatekeeper.mjs create-org --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json --name reviewer-acme
+node ./bin/gatekeeper.mjs create-role --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json --org-name reviewer-acme --role-name metrics-reader
+node ./bin/gatekeeper.mjs attach-policy --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json --org-name reviewer-acme --role-name metrics-reader --policy metrics:read
+```
+
 ## CLI Usage
 
 Show help:
 
 ```bash
+node ./bin/gatekeeper.mjs help
 npx tsx cli/gatekeeper.ts help
 ```
 

@@ -1,6 +1,5 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { join } from "node:path";
 
 import {
   MAGIC_ROUTER_ENV,
@@ -16,6 +15,7 @@ import {
   getProgram,
   maskFromPolicyInput,
   readWallet,
+  resolveWalletPath,
   reasonLabel,
   sendThroughMagicRouter,
   summarizeRuntimeHealth,
@@ -72,10 +72,7 @@ function createContext(flags: Record<string, string>): ClientContext {
   const baseEndpoint =
     flags.cluster ?? process.env.ANCHOR_PROVIDER_URL ?? "http://127.0.0.1:8899";
   const routerEndpoint = flags["magic-router"] ?? process.env[MAGIC_ROUTER_ENV] ?? null;
-  const walletPath =
-    flags.wallet ??
-    process.env.ANCHOR_WALLET ??
-    join(process.cwd(), "wallets", "localnet-authority.json");
+  const walletPath = resolveWalletPath(flags.wallet ?? process.env.ANCHOR_WALLET);
   const wallet = readWallet(walletPath);
 
   const baseConnection = new Connection(baseEndpoint, "confirmed");
