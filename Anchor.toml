@@ -1,0 +1,24 @@
+[toolchain]
+anchor_version = "0.32.1"
+package_manager = "npm"
+
+[features]
+resolution = true
+skip-lint = true
+
+[programs.localnet]
+gatekeeper = "5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu"
+
+[programs.devnet]
+gatekeeper = "5UetKs63bZxoYy5dZvJxYjUSTBmaF5tN7ADR8pB6SMZu"
+
+[provider]
+cluster = "Localnet"
+wallet = "wallets/localnet-authority.json"
+
+[scripts]
+test = "npx tsx tests/gatekeeper.ts"
+
+[test]
+startup_wait = 10000
+

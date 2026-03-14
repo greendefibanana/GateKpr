@@ -1,0 +1,29 @@
+{
+  "name": "gatekeeper",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "anchor build",
+    "test": "anchor test",
+    "test:ts": "npx tsx tests/gatekeeper.ts",
+    "test:demo": "npx tsx tests/web2-demo.ts",
+    "cli": "npx tsx cli/gatekeeper.ts",
+    "diag:router": "npx tsx scripts/router-capability.ts",
+    "diag:transport": "npx tsx scripts/local-transport-doctor.ts",
+    "ops:runtime-health": "npx tsx scripts/runtime-health.ts",
+    "ops:reconcile": "npx tsx scripts/reconcile-runtime.ts",
+    "smoke:devnet:er": "npx tsx scripts/devnet-er-smoke.ts",
+    "demo:devnet:web2": "npx tsx scripts/devnet-web2-demo.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/web3.js": "^1.98.0",
+    "magic-router-sdk": "^1.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3"
+  }
+}

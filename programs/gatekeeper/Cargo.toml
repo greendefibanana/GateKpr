@@ -1,0 +1,21 @@
+[package]
+name = "gatekeeper"
+version = "0.1.0"
+description = "On-chain API gateway backend for Solana"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "gatekeeper"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+
+[dependencies]
+anchor-lang = { workspace = true }
+ephemeral-rollups-sdk = { version = "0.8.8", features = ["anchor"] }
