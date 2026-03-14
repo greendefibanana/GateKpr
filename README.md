@@ -531,9 +531,26 @@ Use a funded Devnet wallet JSON file and point the client at Devnet explicitly:
 
 ```bash
 npm install
-npm exec --yes --package=@gatekpr/gatekeeper gatekpr help
+npm exec --yes --package=@gatekpr/gatekeeper -- gatekpr help
 node ./bin/gatekeeper.mjs help
 node ./bin/gatekeeper.mjs init-gateway --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json
+```
+
+### Install from npm
+
+Run the published CLI without installing it globally:
+
+```bash
+npm exec --yes --package=@gatekpr/gatekeeper -- gatekpr help
+npm exec --yes --package=@gatekpr/gatekeeper -- gatekpr init-gateway --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json
+```
+
+Install it globally if you want the command available directly in your shell:
+
+```bash
+npm install -g @gatekpr/gatekeeper@0.1.1
+gatekpr help
+gatekpr init-gateway --cluster https://api.devnet.solana.com --wallet /path/to/devnet-wallet.json
 ```
 
 ### Self-contained Devnet demo
